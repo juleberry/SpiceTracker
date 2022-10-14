@@ -21,8 +21,9 @@ app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
 // ---------
-// API and other Routes go here
+// ROUTES
 // ---------
+app.use('/api/users', require('./routes/api/users'));
 
 // if Express route not recognized, React will deal with the route
 app.get('/*', (req, res) => {
