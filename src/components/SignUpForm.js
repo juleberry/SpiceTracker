@@ -9,8 +9,7 @@ export default function SignUpForm (props) {
     name: '',
     email: '',
     password: '',
-    confirm: '',
-    adminAcct: ''
+    confirm: ''
   });
 
   const [disable, setDisable] = useState(formData.password !== formData.confirm)
@@ -22,8 +21,7 @@ export default function SignUpForm (props) {
       const payload = {
         email: formData.email,
         password: formData.password,
-        name: formData.name,
-        adminAcct: formData.admin
+        name: formData.name
       }
 
       const user = await signUp(payload);
@@ -51,6 +49,7 @@ export default function SignUpForm (props) {
             onChange={handleChange}
             required
           />
+          <br />
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -59,6 +58,7 @@ export default function SignUpForm (props) {
             onChange={handleChange}
             required
           />
+          <br />
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -67,6 +67,7 @@ export default function SignUpForm (props) {
             onChange={handleChange}
             required
           />
+          <br />
           <label htmlFor="confirm">Confirm:</label>
           <input
             type="password"
@@ -75,6 +76,7 @@ export default function SignUpForm (props) {
             onChange={handleChange}
             required
           />
+          <br />
           <button type="submit" disabled={disable}>SIGN UP!</button>
         </form>
         <p className="error-message">{errorState}</p>
