@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = '/api/users';
+const BASE_URL = '../api/users';
 
 export async function signUp(userData) {
   const response = await axios.post(BASE_URL, userData)
@@ -10,13 +10,8 @@ export async function signUp(userData) {
   }
 }
 
-export async function logIn(credentials) {
-  const response = await axios.post(BASE_URL, JSON.stringify(credentials),
-    {
-    headers: { "Content-Type": "application/json" },
-    withCredentials: true,
-    }
-  )
+export async function logIn(userData) {
+  const response = await axios.post(BASE_URL, JSON.stringify(userData))
   if (response.status === 201) {
     return response.data
   } else {

@@ -1,13 +1,30 @@
 import NavBar from "../components/NavBar";
 import SpiceList from "./SpiceList";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-export default function Dashboard (props) {
-  return (
-    <>
-    <NavBar />
-    <h1>User Dashboard</h1>
-    <p>Overview of functions</p>
-    <SpiceList />
-    </>
-  )
-}
+const Dashboard = () => {
+  const navigate = useNavigate()
+  const [authenticated, setAuthenticated] = useState(null);
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("authenticated");
+    if (loggedInUser) {
+      setAuthenticated(loggedInUser);
+    }
+  }, []);
+    if (!authenticated) {
+    // Redirect
+      navigate('/');
+    } else {
+      return (
+      <>
+        <NavBar />
+          <h1>User Dashboard</h1>
+          <p>Overview of functions</p>
+        <SpiceList />
+      </>
+    );
+  }
+};
+
+export default Dashboard;

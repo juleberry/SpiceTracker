@@ -1,4 +1,5 @@
-const User = require('../../models/Users');
+const User = require('../../models/User');
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 
 const createJWT = (user) => {
@@ -9,6 +10,7 @@ const createJWT = (user) => {
   )
 }
 
+// sign up
 const create = (req, res) => {
   User.create(req.body, (error, createdUser) => {
     if (error) {
@@ -17,12 +19,29 @@ const create = (req, res) => {
     } else {
       const token = createJWT(createdUser);
       res.status(201).json({
-        jwt_token: token
+        token: token
       })
     }
   });
 }
 
-module.exports = {
-  create
-}
+// login
+const login = (req, res) => {
+  User.findOne({email: req.body.email}, (error, foundUser) => {
+      if (foundUser) {
+        const result = bcrypt.compare(req.body.password, foundUser.password)
+        if (result) {
+          const token = createJWT(createdUser);
+          res.status(200).json({
+            token: token
+          })
+        } else {
+          res.status(400).json({ error: "Invalid Password" });
+        }
+      } else {
+        res.status(404).json({ error: "User does not exist" });
+      }
+    }
+  )}
+
+module.exports = { create, login }

@@ -1,26 +1,19 @@
-// import { logOut } from "../utilities/users-service";
+import { logOut } from '../utilities/users-service';
+import { useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
 
-// export default function LogOut({ user, setUser }) {
-//   function handleLogOut() {
-//     logOut();
-//     setUser(null);
-//   }
+export default function UserLogOut(props) {
+  const navigate = useNavigate()
+  function handleLogOut() {
+    logOut();
+    navigate('/');
+  }
 
-//   return (
-//     <>
-//     <div className="logOut">
-//       <div>Are you sure you want to log out, {user?.name}?</div>
-//       <div className="email">{user?.email}</div>
-//       <button onClick={handleLogOut}>LOG OUT</button>
-//     </div>
-//     </>
-//   );
-// }
-
-export default function LogOut (props) {
   return (
-    <>
-    <h1>Log Out Page</h1>
-    </>
-  )
+    <div className="UserLogOut">
+      <NavBar />
+      <div>Are you sure you want to log out?</div>
+      <button className="btn-sm" onClick={handleLogOut}>Log Out</button>
+    </div>
+  );
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signUp } from '../utilities/users-service'
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function SignUpForm (props) {
 
@@ -24,9 +25,10 @@ export default function SignUpForm (props) {
         name: formData.name
       }
 
-      const user = await signUp(payload);
-      props.setUser(user)
+      await signUp(payload);
+      Navigate('/dashboard')
 
+      
     } catch {
       setErrorState('Sign Up Failed - Try Again');
     }
@@ -77,7 +79,7 @@ export default function SignUpForm (props) {
             required
           />
           <br />
-          <button type="submit" disabled={disable}>SIGN UP!</button>
+          <button type="submit" disabled={disable} onClick={handleSubmit}>SIGN UP!</button>
         </form>
         <p className="error-message">{errorState}</p>
       </div>

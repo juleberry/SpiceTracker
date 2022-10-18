@@ -1,42 +1,39 @@
 import './App.css';
-import { useState } from 'react'
+import './style.css'
+import { Routes, Route } from 'react-router-dom'
 import Auth from './pages/Auth'
 import NewSpice from './pages/NewSpice';
 import SpiceCabinet from './pages/SpiceCabinet';
-import { Routes, Route } from 'react-router-dom'
-import NavBar from './components/NavBar';
-import { getUser } from './utilities/users-service'
-import LogInForm from './components/LogInForm';
+import Dashboard from './pages/Dashboard'
 import EditSpice from './pages/EditSpice'
-import LogOut from './components/LogOut';
 import Settings from './pages/Settings';
 import Footer from './components/Footer';
+import UserLogOut from './components/LogOut';
 
 function App() {
 
-  const [user, setUser] = useState(getUser())
-
   return (
-    <div className="App">
+    <>
+    <main className="App">
       {
-        user ?
-      <>
-      <NavBar user={user} />
+        localStorage.getItem('token') ?
+        <>
       <Routes>
-        <Route path="/" element={<Auth />} />
-        <Route path="/users/login" element={<LogInForm />} />
+        <Route index element={<Auth />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/spices" element={<SpiceCabinet />} />
         <Route path="/spices/new" element={<NewSpice />} />
         <Route path="/spices/edit" element={<EditSpice />} />
         <Route path="/users/settings" element={<Settings />} />
-        <Route path="/users/logout" element={<LogOut />} />
+        <Route path="/users/logout" element={<UserLogOut />} />
       </Routes>
       </>
       :
-      <Auth setUser={setUser} />
+      <Auth />
   }
+  </main>
   <Footer />
-    </div>
+    </>
   );
 }
 
