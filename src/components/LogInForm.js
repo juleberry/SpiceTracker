@@ -16,7 +16,7 @@ export default function LogInForm(props) {
     evt.preventDefault();
     try {
       await logIn(credentials);
-      navigate('/dashboard');
+      navigate('/dashboard')
     } catch {
       setError('Log In Failed - Try Again');
     }

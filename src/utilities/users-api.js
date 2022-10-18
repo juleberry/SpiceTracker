@@ -11,7 +11,7 @@ export async function signUp(userData) {
 }
 
 export async function logIn(userData) {
-  const response = await axios.post(BASE_URL, JSON.stringify(userData))
+  const response = await axios.post(`${BASE_URL}/login`, userData)
   if (response.status === 201) {
     return response.data
   } else {

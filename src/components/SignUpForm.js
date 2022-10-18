@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { signUp } from '../utilities/users-service'
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm (props) {
+  const navigate = useNavigate()
 
   const [errorState, setErrorState] = useState('');
 
@@ -26,7 +27,7 @@ export default function SignUpForm (props) {
       }
 
       await signUp(payload);
-      Navigate('/dashboard')
+      navigate('/dashboard')
 
       
     } catch {

@@ -19,7 +19,7 @@ const Dashboard = () => {
       return (
       <>
         <NavBar />
-          <h1>User Dashboard</h1>
+          <h1>Dashboard</h1>
           <p>Overview of functions</p>
         <SpiceList />
       </>

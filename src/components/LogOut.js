@@ -12,6 +12,7 @@ export default function UserLogOut(props) {
   return (
     <div className="UserLogOut">
       <NavBar />
+      <h1>Log Out</h1>
       <div>Are you sure you want to log out?</div>
       <button className="btn-sm" onClick={handleLogOut}>Log Out</button>
     </div>

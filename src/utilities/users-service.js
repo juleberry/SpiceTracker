@@ -15,8 +15,8 @@ export async function signUp(userData) {
 
 export async function logIn(userData) {
   try {
-    const token = await usersAPI.logIn(userData);
-    localStorage.setItem('token', token);
+    const result = await usersAPI.logIn(userData);
+    localStorage.setItem('token', result.token);
   } catch {
     throw new Error('Invalid Credentials');
   }

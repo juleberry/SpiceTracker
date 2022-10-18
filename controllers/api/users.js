@@ -27,12 +27,12 @@ const create = (req, res) => {
 
 // login
 const login = (req, res) => {
-  User.findOne({email: req.body.email}, (error, foundUser) => {
+  User.findOne({email: req.body.email}, async (error, foundUser) => {
       if (foundUser) {
-        const result = bcrypt.compare(req.body.password, foundUser.password)
+        const result = await bcrypt.compare(req.body.password, foundUser.password)
         if (result) {
-          const token = createJWT(createdUser);
-          res.status(200).json({
+          const token = createJWT(foundUser);
+          res.status(201).json({
             token: token
           })
         } else {
