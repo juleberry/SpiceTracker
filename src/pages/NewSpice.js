@@ -1,9 +1,6 @@
-import NavBar from "../components/NavBar"
-
 export default function NewSpice (props) {
   return (
     <>
-    <NavBar />
     <h1>Add New Spice</h1>
     <form action="/spices" method="POST">
         <label htmlFor="name">Spice Name:</label>
@@ -31,7 +28,7 @@ export default function NewSpice (props) {
         <option value="8">8</option>
       </select><br/>
 
-      <label for="expDate">Expiration Date:</label>
+      <label htmlFor="expDate">Expiration Date:</label>
       <input type="month" name="expDate" /><br/>
 
         <input type="submit" name="" value="Create Spice" />

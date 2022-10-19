@@ -1,39 +1,62 @@
-import { useState } from 'react';
-import { logIn } from '../utilities/users-service'
-import { useNavigate } from 'react-router-dom'
+import { useState } from "react";
+import { logIn } from '../utilities/users-service';
 
-export default function LogInForm(props) {
-  const navigate = useNavigate();
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
+export default function LogInForm (props) {
+  
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
 
-  function handleChange(evt) {
-    setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
-    setError('');
-  }
+  const [errorState, setErrorState] = useState('')
 
-  async function handleSubmit(evt) {
-    evt.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      await logIn(credentials);
-      navigate('/dashboard')
+
+      const payload = {
+        email: formData.email,
+        password: formData.password
+      }
+
+      const user = await logIn(payload);
+      props.setUser(user);
+
     } catch {
-      setError('Log In Failed - Try Again');
+      setErrorState('Sign Up Failed - Try Again');
     }
   }
 
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  }
+
   return (
-    <div>
+    <>
       <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input type="text" name="email" value={credentials.email} onChange={handleChange} required /><br />
-          <label>Password</label>
-          <input type="password" name="password" value={credentials.password} onChange={handleChange} required /><br />
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          /><br />
+
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          /><br />
+          
           <button type="submit">Log In</button>
         </form>
+        <p className="error-message">{errorState}</p>
       </div>
-      <p className="error-message">&nbsp;{error}</p>
-    </div>
-  );
-  }
+    </>
+  )
+}

@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { signUp } from '../utilities/users-service'
-import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm (props) {
-  const navigate = useNavigate()
 
   const [errorState, setErrorState] = useState('');
 
@@ -26,17 +24,15 @@ export default function SignUpForm (props) {
         name: formData.name
       }
 
-      await signUp(payload);
-      navigate('/dashboard')
+      const user = await signUp(payload);
+      props.setUser(user);
 
-      
     } catch {
       setErrorState('Sign Up Failed - Try Again');
     }
   }
 
   const handleChange = (event) => {
-    console.log(event.target);
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
@@ -51,8 +47,8 @@ export default function SignUpForm (props) {
             value={formData.name}
             onChange={handleChange}
             required
-          />
-          <br />
+          /><br />
+          
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -60,8 +56,8 @@ export default function SignUpForm (props) {
             value={formData.email}
             onChange={handleChange}
             required
-          />
-          <br />
+          /><br />
+
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -69,8 +65,8 @@ export default function SignUpForm (props) {
             value={formData.password}
             onChange={handleChange}
             required
-          />
-          <br />
+          /><br />
+
           <label htmlFor="confirm">Confirm:</label>
           <input
             type="password"
@@ -78,9 +74,8 @@ export default function SignUpForm (props) {
             value={formData.confirm}
             onChange={handleChange}
             required
-          />
-          <br />
-          <button type="submit" disabled={disable} onClick={handleSubmit}>SIGN UP!</button>
+          /><br />
+          <button type="submit" disabled={disable}>Sign Up</button>
         </form>
         <p className="error-message">{errorState}</p>
       </div>

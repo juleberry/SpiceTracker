@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
-SALT_ROUNDS = Number(process.env.SALT_ROUNDS);
+require('dotenv').config()
+SALT_ROUNDS = Number(process.env.SALT_ROUNDS)
 
 const userSchema = new Schema({
   name: { type: String, required: true},
@@ -15,7 +16,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     trim: true,
-    minLength: 4,
+    minLength: 3,
     required: true
   }
 }, {

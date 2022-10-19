@@ -1,11 +1,17 @@
-// import NavBar from "../components/NavBar"
+import SearchBar from "../components/SearchBar";
+import Spice from '../pages/Spice'
 
 export default function SpiceList (props) {
   return (
     <>
-    {/* <NavBar /> */}
+    <div id="spiceList">
     <h2>Spice List</h2>
-    <p>Basic List of Spices</p>
+    <SearchBar />
+    <Spice />
+    <Spice />
+    <Spice />
+    <Spice />
+    </div>
     </>
   )
 }

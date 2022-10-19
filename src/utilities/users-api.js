@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = '../api/users';
+const BASE_URL = '/api/users';
 
 export async function signUp(userData) {
   const response = await axios.post(BASE_URL, userData)
@@ -12,9 +12,9 @@ export async function signUp(userData) {
 
 export async function logIn(userData) {
   const response = await axios.post(`${BASE_URL}/login`, userData)
-  if (response.status === 201) {
+  if (response.status === 200) {
     return response.data
   } else {
-    throw new Error ('Invalid Log In!')
+    throw new Error('Invalid Log In!')
   }
 }

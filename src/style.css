@@ -2,7 +2,29 @@
   display: none;
 }
 
+body {
+  background-color: lightgoldenrodyellow;
+  display: flex;
+  justify-content: space-between;
+}
+
+#navBar {
+  background-color: darkolivegreen;
+  color: white;
+  padding: .1rem;
+}
+
+#spiceList {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 footer {
+  padding: .1rem;
+  font-weight: bolder;
   bottom: 0;
   text-align: center;
+  background-color: sienna;
 }
