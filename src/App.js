@@ -33,7 +33,7 @@ function App() {
         {/* spice routes */}
         <Route path="/spices" element={<SpiceCabinet />} />
         <Route path="/spices/new" element={<NewSpice />} />
-        <Route path="/spices/:id/edit" element={<EditSpice />} />
+        <Route path="/spices/edit" element={<EditSpice />} />
         <Route path="/spices/:id" element={<Spice />} />
       </Routes>
       </>

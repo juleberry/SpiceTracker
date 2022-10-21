@@ -51,11 +51,11 @@ export async function deleteSpice (spiceData) {
   return getSpices();
 }
 
-export async function editSpice(spiceData) {
-  const response = await spicesAPI.editSpice(spiceData);
-  editSpice.save().then(spiceData => {
+export async function updateSpice(spiceData) {
+  const response = await spicesAPI.updateSpice(spiceData);
+  updateSpice.save().then(spiceData => {
     response.json(spiceData)
-    console.log('spice details edited')
+    console.log('spice details updated')
   })
-  return newSpice();
+  return updateSpice();
 }

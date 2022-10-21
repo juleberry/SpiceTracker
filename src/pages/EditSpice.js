@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
-import { editSpice } from '../utilities/spices-service'
-import { getSpices } from '../utilities/spices.api'
+import { useState } from "react";
+// import { useEffect } from "react";
+import { updateSpice } from '../utilities/spices-service'
+// import { getSpices } from '../utilities/spices.api'
 
 export default function EditSpice (props) {
 
-  const [edit, setEdit] = useState(props.spice);
+  // const [edit, setEdit] = useState(props.spice);
 
-  useEffect(() => {
-    getSpices()
-    if(edit) {
-      setEdit(props.spice)
-    }
-  }, [edit, props.spice])
+  // useEffect(() => {
+  //   getSpices()
+  //   if(edit) {
+  //     setEdit(props.spice)
+  //   }
+  // }, [edit, props.spice])
 
   const [errorState, setErrorState] = useState()
 
@@ -37,10 +38,10 @@ export default function EditSpice (props) {
         amt: formData.amt
       }
 
-      await editSpice(payload);
+      await updateSpice(payload);
 
     } catch {
-      setErrorState('Editing Spice Failed - Try Again');
+      setErrorState('Update of Spice Details Failed - Try Again');
     }
   }
 
