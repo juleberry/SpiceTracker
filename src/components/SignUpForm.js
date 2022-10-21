@@ -40,7 +40,7 @@ export default function SignUpForm (props) {
     <>
       <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Name: </label>
           <input
             type="text"
             name="name"
@@ -49,7 +49,7 @@ export default function SignUpForm (props) {
             required
           /><br />
           
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email: </label>
           <input
             type="email"
             name="email"
@@ -58,7 +58,7 @@ export default function SignUpForm (props) {
             required
           /><br />
 
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password: </label>
           <input
             type="password"
             name="password"
@@ -67,7 +67,7 @@ export default function SignUpForm (props) {
             required
           /><br />
 
-          <label htmlFor="confirm">Confirm:</label>
+          <label htmlFor="confirm">Confirm: </label>
           <input
             type="password"
             name="confirm"
@@ -75,7 +75,7 @@ export default function SignUpForm (props) {
             onChange={handleChange}
             required
           /><br />
-          <button type="submit" disabled={disable}>Sign Up</button>
+          <button type="submit" disabled={disable}>Sign Up</button> <input type="reset" onClick={useState('')}/>
         </form>
         <p className="error-message">{errorState}</p>
       </div>

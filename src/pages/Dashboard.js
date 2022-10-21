@@ -1,31 +1,16 @@
-// import { useNavigate } from "react-router-dom";
-// import { useEffect, useState } from "react";
-
-const Dashboard = () => {
-  // const navigate = useNavigate()
-  // const [authenticated, setAuthenticated] = useState(null);
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem("authenticated");
-  //   if (loggedInUser) {
-  //     setAuthenticated(loggedInUser);
-  //   }
-  // }, []);
-  //   if (!authenticated) {
-  //   // Redirect
-  //     navigate('/');
-  //   } else {
+const Dashboard = (props) => {
       return (
       <>
           <h1>Dashboard</h1>
-          <ul>
-            <li>View Spices</li>
-            <li>Add Spice</li>
-            <li>Update Spices</li>
-            <li>Settings</li>
+          <p>Digitally keep inventory of your spice cabinet and never run out of essential spices again!</p>
+          <ul id="userChoices">
+            <li class="choices">View Spices</li>
+            <li class="choices">Add Spice</li>
+            <li class="choices">Update Spices</li>
+            <li class="choices">Settings</li>
           </ul>
       </>
     );
   }
-// };
 
 export default Dashboard;

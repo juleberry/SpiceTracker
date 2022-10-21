@@ -1,10 +1,12 @@
-export default function Spice (props) {
+export default function Spice ({ spice }) {
   return (
     <>
-    <h4>Insert Spice Name</h4>
-    <p>Size: </p>
-    <p>Quantity: </p>
-    <p>Expiration Date: </p>
+    <li>
+      <h4>{spice.name}</h4>
+      <p>Size: {spice.size}</p>
+      <p>Quantity: {spice.qty}</p>
+      <p>Expiration Date: {spice.expDate}</p>
+    </li>
     </>
   )
 }

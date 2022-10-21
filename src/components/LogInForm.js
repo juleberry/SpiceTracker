@@ -35,7 +35,7 @@ export default function LogInForm (props) {
     <>
       <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email: </label>
           <input
             type="email"
             name="email"
@@ -44,7 +44,7 @@ export default function LogInForm (props) {
             required
           /><br />
 
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password: </label>
           <input
             type="password"
             name="password"

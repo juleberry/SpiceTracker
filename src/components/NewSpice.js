@@ -1,30 +1,16 @@
-import { useEffect, useState } from "react";
-import { editSpice } from '../utilities/spices-service'
-import { getSpices } from '../utilities/spices.api'
+import { useState } from "react";
+import { newSpice } from '../utilities/spices-service'
 
-export default function EditSpice (props) {
+export default function NewSpice (props) {
 
-  const [edit, setEdit] = useState(props.spice);
-
-  useEffect(() => {
-    getSpices()
-    if(edit) {
-      setEdit(props.spice)
-    }
-  }, [edit, props.spice])
-
-  const [errorState, setErrorState] = useState()
+  const [errorState, setErrorState] = useState('');
 
   const [formData, setFormData] = useState({
     name: '',
     size: '',
-    qty: '',
+    expDate: '',
     amt: ''
   });
-
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,27 +23,27 @@ export default function EditSpice (props) {
         amt: formData.amt
       }
 
-      await editSpice(payload);
+      await newSpice(payload);
 
     } catch {
-      setErrorState('Editing Spice Failed - Try Again');
+      setErrorState('Adding New Spice Failed - Try Again');
     }
   }
 
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  }
+
   return (
-    
     <>
-    <h1>Update Spice</h1>
-    {/* <p>Here will be the details to edit individual spices. User will choose from the list populated here.
-    User will be able to delete spices or edit spice details.
-    </p> */}
-    <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Spice Name:</label>
-        <input type="text" name="name" defaultValue={formData.name}
+    <h1>Add New Spice</h1>
+    <form autoComplete="off" onSubmit={handleSubmit}>
+        <label htmlFor="name">Spice Name: </label>
+        <input type="text" name="name" value={formData.name}
             onChange={handleChange} /><br/>
 
-        <label htmlFor="size">Size:</label>
-        <select name="size" defaultValue={formData.size}
+        <label htmlFor="size">Size: </label>
+        <select name="size" value={formData.size}
             onChange={handleChange}>
         <option value="none">Select a Size</option>
         <option value="Small">Small (0.90 oz)</option>
@@ -66,12 +52,12 @@ export default function EditSpice (props) {
         <option value="X-Large">X-Large (12.00 oz+)</option>
       </select><br/>
 
-      <label htmlFor="expDate">Expiration Date:</label>
-      <input type="month" name="expDate" defaultValue={formData.expDate}
+      <label htmlFor="expDate">Expiration Date: </label>
+      <input type="month" name="expDate" value={formData.expDate}
             onChange={handleChange} /><br/>
 
-        <label htmlFor="amt">Amount Remaining:</label>
-        <select name="amt" defaultValue={formData.amt}
+        <label htmlFor="amt">Amount Remaining: </label>
+        <select name="amt" value={formData.amt}
             onChange={handleChange}>
         <option value="none">%</option>
         <option value="10">10%</option>
@@ -88,6 +74,7 @@ export default function EditSpice (props) {
 
       <button type="submit">Add Spice</button>
       </form>
+      <p className="error-message">{errorState}</p>
     </>
   )
 }

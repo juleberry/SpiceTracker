@@ -4,7 +4,8 @@ import { Routes, Route } from 'react-router-dom'
 import { useState } from 'react';
 import { getUser } from './utilities/users-service'
 import Auth from './pages/Auth'
-import NewSpice from './pages/NewSpice';
+import Spice from './pages/Spice';
+import NewSpice from './components/NewSpice'
 import SpiceCabinet from './pages/SpiceCabinet';
 import Dashboard from './pages/Dashboard'
 import EditSpice from './pages/EditSpice'
@@ -24,11 +25,16 @@ function App() {
         <>
         <NavBar setUser={setUser} user={user} />
       <Routes>
+
+        {/* main routes */}
         <Route path="/" element={<Dashboard />} />
+        <Route path="/users/:id/settings" element={<Settings setUser={setUser} />} />
+
+        {/* spice routes */}
         <Route path="/spices" element={<SpiceCabinet />} />
         <Route path="/spices/new" element={<NewSpice />} />
-        <Route path="/spices/edit" element={<EditSpice />} />
-        <Route path="/users/settings" element={<Settings setUser={setUser} />} />
+        <Route path="/spices/:id/edit" element={<EditSpice />} />
+        <Route path="/spices/:id" element={<Spice />} />
       </Routes>
       </>
       :
