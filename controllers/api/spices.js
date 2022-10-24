@@ -1,4 +1,5 @@
 const Spice = require('../../models/Spice')
+const User = require('../../models/User')
 
 // Index
 const spiceIndex = async (req, res) => {
