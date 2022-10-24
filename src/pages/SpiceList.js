@@ -1,5 +1,14 @@
 import SearchBar from "../components/SearchBar";
-import Spice from '../pages/Spice'
+// import SpiceListItem from '../pages/Spice'
+// import Spice from '../pages/Spice'
+import spiceList from '../data'
+import SpiceListItem from "./SpiceListItem";
+
+const list = spiceList.map((spice, index) => {
+  return (
+    <SpiceListItem key={index} spice={spice} />
+  )
+})
 
 export default function SpiceList (props) {
   return (
@@ -8,14 +17,8 @@ export default function SpiceList (props) {
     <h2>Spice List</h2>
     <SearchBar />
     <ul>
-          {
-            props.spices?.map((spice, index) => {
-              return (
-                <Spice key={index} spice={spice} />
-              )
-            })
-          }
-        </ul>
+      <li>{list}</li>
+    </ul>
     </div>
     </>
   )

@@ -1,26 +1,26 @@
 import { useState } from "react";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { updateSpice } from '../utilities/spices-service'
-// import { getSpices } from '../utilities/spices.api'
+import { getSpices } from '../utilities/spices.api'
 
 export default function EditSpice (props) {
 
-  // const [edit, setEdit] = useState(props.spice);
+  const [edit, setEdit] = useState(props?.spice);
 
-  // useEffect(() => {
-  //   getSpices()
-  //   if(edit) {
-  //     setEdit(props.spice)
-  //   }
-  // }, [edit, props.spice])
+  useEffect(() => {
+    getSpices()
+    if(edit) {
+      setEdit(props.spice)
+    }
+  }, [edit, props.spice])
 
   const [errorState, setErrorState] = useState()
 
   const [formData, setFormData] = useState({
     name: '',
     size: '',
-    qty: '',
-    amt: ''
+    amt: '',
+    expDate: ''
   });
 
   const handleChange = (event) => {

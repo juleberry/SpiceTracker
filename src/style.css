@@ -11,7 +11,8 @@ body {
   justify-content: space-between;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  height: 100vh;
+  /* overflow: hidden; */
 }
 
 form, input, label, select, option {
@@ -134,8 +135,8 @@ footer {
   margin: 0;
   font-weight: bold;
   font-size: .75rem;
-  position: absolute;
   bottom: 0;
+  position: sticky;
   width: 100vw;
   opacity: 0.8;
   overflow-x: hidden;

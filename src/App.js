@@ -9,6 +9,7 @@ import NewSpice from './components/NewSpice'
 import SpiceCabinet from './pages/SpiceCabinet';
 import Dashboard from './pages/Dashboard'
 import EditSpice from './pages/EditSpice'
+import SpiceList from './pages/SpiceList'
 import Settings from './pages/Settings';
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
@@ -35,6 +36,7 @@ function App() {
         <Route path="/spices/new" element={<NewSpice />} />
         <Route path="/spices/edit" element={<EditSpice />} />
         <Route path="/spices/:id" element={<Spice />} />
+        <Route path="/spices/list" element={<SpiceList />} />
       </Routes>
       </>
       :
