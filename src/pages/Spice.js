@@ -1,12 +1,15 @@
-export default function Spice ({ spice }) {
-  return (
-    <>
-    <li>
-      <h4>{spice.name}</h4>
-      <p>Size: {spice.size}</p>
-      <p>Quantity: {spice.qty}</p>
-      <p>Expiration Date: {spice.expDate}</p>
-    </li>
-    </>
-  )
-}
+import { Link } from "react-router-dom"
+
+const Spice = props => {
+    const spice = props.spiceList.filter( d => d.id === props.match.params.symbol)[0]
+    return (
+      <div>
+        Spice Details Here
+        <h1>{spice.name}</h1>
+        <Link to={"/spices"}><button>Return</button></Link>
+      </div>
+    )
+  }
+  
+  
+  export default Spice

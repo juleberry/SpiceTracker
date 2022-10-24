@@ -15,7 +15,7 @@ router.delete('/:id', spicesCtrl.deleteSpice)
 router.put('/', spicesCtrl.updateSpice);
 
 // create -- create(req.body)
-router.post('/', spicesCtrl.createSpice);
+router.post('', spicesCtrl.createSpice);
 
 // edit spice -- findOne
 router.get('/:id', spicesCtrl.editSpice)

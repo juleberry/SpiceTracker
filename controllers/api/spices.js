@@ -14,19 +14,37 @@ const spiceIndex = async (req, res) => {
 
 // New -- no method
 
+
 // Delete
-// const deleteSpice = async (req, res) => {
-//   Spice.deleteOne
-// }
+const deleteSpice = async (req, res) => {
+  Spice.deleteOne({
+    _id: req.params.id
+  }, (error, data) => {
+    console.log(data);
+    res.redirect('');
+  })
+}
 
 // Update
-// const updateSpice = async (req, res) => {
-//   Spice.updateOne
-// }
+const updateSpice = async (req, res) => {
+  Spice.updateOne({
+    _id: req.params.id
+  }, req.body, (error, data) => {
+    if (error) {
+      console.error(error);
+      res.json({
+        error: error
+      });
+    } else {
+      res.redirect(`/spices/${req.params.id}`);
+    }
+  });
+}
 
 // Create
 const createSpice = (req, res) => {
   Spice.create(req.body, (error, createdSpice) => {
+    res.redirect('/spices')
     if (error) {
       console.error(error);
       res.status(400).json(error)
@@ -56,10 +74,12 @@ const editSpice = (req, res) => {
 }
 
 // Show
-// const viewSpice = (req, res) => {
-//   Spice.findOne({
-
-//   })
-// }
+const viewSpice = (req, res) => {
+  Spice.findOne({ _id: req.params.id }, (error, foundSpice) => {
+    res.render('spices/Show', {
+      spice: foundSpice
+    })
+  }
+)}
 
 module.exports = { spiceIndex, newSpice, deleteSpice, updateSpice, createSpice, editSpice, viewSpice }

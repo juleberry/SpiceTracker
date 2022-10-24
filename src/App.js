@@ -28,7 +28,7 @@ function App() {
 
         {/* main routes */}
         <Route path="/" element={<Dashboard />} />
-        <Route path="/users/:id/settings" element={<Settings setUser={setUser} />} />
+        <Route path="/users/:id/settings" element={<Settings setUser={setUser} user={user} />} />
 
         {/* spice routes */}
         <Route path="/spices" element={<SpiceCabinet />} />

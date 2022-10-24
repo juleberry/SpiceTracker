@@ -37,15 +37,15 @@ export default function NewSpice (props) {
   return (
     <>
     <h1>Add New Spice</h1>
-    <form autoComplete="off" onSubmit={handleSubmit}>
+    <form autoComplete="off" onSubmit={handleSubmit} class="newSpiceForm">
         <label htmlFor="name">Spice Name: </label>
         <input type="text" name="name" value={formData.name}
             onChange={handleChange} /><br/>
 
         <label htmlFor="size">Size: </label>
         <select name="size" value={formData.size}
-            onChange={handleChange}>
-        <option value="none">Select a Size</option>
+            onChange={handleChange}class="newSpiceForm">
+        <option value="none" class="newSpiceForm">Select a Size</option>
         <option value="Small">Small (0.90 oz)</option>
         <option value="Medium">Medium (3.00 oz - 4.00 oz)</option>
         <option value="Large">Large (8.00 oz)</option>
@@ -54,7 +54,7 @@ export default function NewSpice (props) {
 
       <label htmlFor="expDate">Expiration Date: </label>
       <input type="month" name="expDate" value={formData.expDate}
-            onChange={handleChange} /><br/>
+            onChange={handleChange} id="newSpiceForm" /><br/>
 
         <label htmlFor="amt">Amount Remaining: </label>
         <select name="amt" value={formData.amt}
@@ -72,7 +72,7 @@ export default function NewSpice (props) {
         <option value="100">100%</option>
       </select><br/>
 
-      <button type="submit">Add Spice</button>
+      <button type="submit" class="newSpiceForm">Add Spice</button>
       </form>
       <p className="error-message">{errorState}</p>
     </>
