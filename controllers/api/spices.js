@@ -1,10 +1,9 @@
 const Spice = require('../../models/Spice')
-const User = require('../../models/User')
 
 // Index
 const spiceIndex = async (req, res) => {
   try {
-      const allSpices = await Spice.findMany({
+      const allSpices = Spice.findMany({
       
       });
       res.status(200).json(allSpices);
@@ -13,8 +12,10 @@ const spiceIndex = async (req, res) => {
   }
 };
 
-// New -- no method
-
+// New -- no method?
+router.get('/new', (req, res) => {
+  res.render('spices/New');
+});
 
 // Delete
 const deleteSpice = async (req, res) => {
@@ -43,9 +44,8 @@ const updateSpice = async (req, res) => {
 }
 
 // Create
-const createSpice = (req, res) => {
+const newSpice = (req, res) => {
   Spice.create(req.body, (error, createdSpice) => {
-    res.redirect('/spices')
     if (error) {
       console.error(error);
       res.status(400).json(error)
@@ -83,4 +83,4 @@ const viewSpice = (req, res) => {
   }
 )}
 
-module.exports = { spiceIndex, newSpice, deleteSpice, updateSpice, createSpice, editSpice, viewSpice }
+module.exports = { spiceIndex, newSpice, deleteSpice, updateSpice, editSpice, viewSpice }
