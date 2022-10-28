@@ -13,6 +13,8 @@
 
 # misc
 nextSteps.txt
+oldNewSpiceForm.txt
+oldEditSpiceForm.txt
 .DS_Store
 .env
 .env.local

@@ -1,64 +1,63 @@
 const Spice = require('../../models/Spice')
 
-// Index
-const spiceIndex = async (req, res) => {
+//GET '/spices'
+const getAllSpice = async (req, res) => {
   try {
-      const allSpices = Spice.findMany({
-      
-      });
-      res.status(200).json(allSpices);
-  } catch(err){
-      res.status(400).json(err);
+    const allSpices = await Spice.find({})
+    res.json(allSpices)
+  } catch(err) {
+    res.json({message:err})
   }
 };
 
-// New -- no method?
-router.get('/new', (req, res) => {
-  res.render('spices/New');
-});
+//POST '/spices/new'
+const newSpice = (req, res, next) => {
+  Spice.findOne({ name: req.body.name }, (err, data) => {
 
-// Delete
-const deleteSpice = async (req, res) => {
-  Spice.deleteOne({
-    _id: req.params.id
-  }, (error, data) => {
-    console.log(data);
-    res.redirect('');
-  })
-}
+    //if spice not in db, add it
+    if (!data) {
+        //create a new spice object using the Spice model and req.body
+        const newSpice = new Spice({
+            name:req.body.name,
+            size: req.body.size,
+            expDate: req.body.expDate,
+            amt: req.body.amt
+        })
 
-// Update
-const updateSpice = async (req, res) => {
-  Spice.updateOne({
-    _id: req.params.id
-  }, req.body, (error, data) => {
-    if (error) {
-      console.error(error);
-      res.json({
-        error: error
-      });
-    } else {
-      res.redirect(`/spices/${req.params.id}`);
+        // save this object to database
+        newSpice.save((err, data)=>{
+            if(err) return res.json({Error: err});
+            return res.json(data);
+        })
+    //if there's an error or the tea is in db, return a message         
+    }else{
+        if(err) return res.json(`Something went wrong, please try again. ${err}`);
+        return res.json({message:"Spice already exists"});
     }
-  });
-}
+})    
+};
 
-// Create
-const newSpice = (req, res) => {
-  Spice.create(req.body, (error, createdSpice) => {
-    if (error) {
-      console.error(error);
-      res.status(400).json(error)
-    } else {
-      console.error(error)
-      res.status(201).json({
-        spice: createdSpice
-      })
-    }
-})
-}
+//DELETE '/spices'
+const deleteAllSpice = (req, res, next) => {
+  res.json({message: "DELETE all spices"});
+};
 
-// Edit
+//GET '/spices/:id/view'
+const getOneSpice = (req, res, next) => {
+  res.json({message: "GET 1 spice"});
+};
+
+//POST '/spices/:name'
+// const newComment = (req, res, next) => {
+//   res.json({message: "POST 1 spice comment"});
+// };
+
+//DELETE '/spices/:id'
+const deleteOneSpice = (req, res, next) => {
+  res.json({message: "DELETE 1 spice"});
+};
+
+// EDIT '/spices/edit/:id'
 const editSpice = (req, res) => {
   Spice.findOne({
     _id: req.params.id
@@ -74,13 +73,12 @@ const editSpice = (req, res) => {
   })
 }
 
-// Show
-const viewSpice = (req, res) => {
-  Spice.findOne({ _id: req.params.id }, (error, foundSpice) => {
-    res.render('spices/Show', {
-      spice: foundSpice
-    })
-  }
-)}
-
-module.exports = { spiceIndex, newSpice, deleteSpice, updateSpice, editSpice, viewSpice }
+//export controller functions
+module.exports = {
+  getAllSpice, 
+  newSpice,
+  deleteAllSpice,
+  getOneSpice,
+  // newComment,
+  deleteOneSpice
+};

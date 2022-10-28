@@ -1,49 +1,46 @@
-import { useState } from "react";
-import { newSpice } from '../utilities/spices-service'
+import axios from "axios";
+import React from "react";
+
+const BASE_URL = '/api/spice';
 
 export default function NewSpice (props) {
+  const [data, setData] = React.useState(null);
 
-  const [errorState, setErrorState] = useState('');
-
-  const [formData, setFormData] = useState({
-    name: '',
-    size: '',
-    expDate: '',
-    amt: ''
-  });
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-
-      const payload = {
-        name: formData.name,
-        size: formData.size,
-        expDate: formData.expDate,
-        amt: formData.amt
-      }
-
-      await newSpice(payload);
-
-    } catch {
-      setErrorState('Adding New Spice Failed - Try Again');
-    }
-  }
+  React.useEffect(() => {
+    axios.get(`${BASE_URL}/new`).then((response) => {
+      setData(response.data);
+    });
+  }, []);
 
   const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+    setData({ ...data, [event.target.name]: event.target.value });
   }
+
+  const handleSubmit = async (event) => {
+	event.preventDefault();
+    axios.post(`${BASE_URL}/new`, {
+        name: data.name,
+        size: data.size,
+        expDate: data.expDate,
+        amt: data.amt
+      })
+      .then((response) => {
+        setData(response.data);
+      });
+  }
+
+  if (!data) return "No Spice Details!"
 
   return (
     <>
     <h1>Add New Spice</h1>
     <form autoComplete="off" onSubmit={handleSubmit} className="newSpiceForm">
         <label htmlFor="name">Spice Name: </label>
-        <input type="text" name="name" value={formData.name}
+        <input type="text" name="name" value={data.name}
             onChange={handleChange} /><br/>
 
         <label htmlFor="size">Size: </label>
-        <select name="size" value={formData.size}
+        <select name="size" value={data.size}
             onChange={handleChange} className="newSpiceForm">
         <option value="none" className="newSpiceForm">Select a Size</option>
         <option value="Small">Small (0.90 oz)</option>
@@ -53,11 +50,11 @@ export default function NewSpice (props) {
       </select><br/>
 
       <label htmlFor="expDate">Expiration Date: </label>
-      <input type="month" name="expDate" value={formData.expDate}
+      <input type="month" name="expDate" value={data.expDate}
             onChange={handleChange} className="newSpiceForm" /><br/>
 
         <label htmlFor="amt">Amount Remaining: </label>
-        <select name="amt" value={formData.amt}
+        <select name="amt" value={data.amt}
             onChange={handleChange}>
         <option value="none">%</option>
         <option value="10">10%</option>
@@ -72,9 +69,8 @@ export default function NewSpice (props) {
         <option value="100">100%</option>
       </select><br/>
 
-      <button type="submit" className="newSpiceForm">Add Spice</button>
+      <input type="submit" className="newSpiceForm submitBtns" value="Add New Spice" />
       </form>
-      <p className="error-message">{errorState}</p>
     </>
-  )
+  );
 }

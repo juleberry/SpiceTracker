@@ -2,6 +2,9 @@ const express = require('express')
 const path = require('path')
 const favicon = require('serve-favicon')
 const logger = require('morgan')
+const userRoutes = require('./routes/api/users')
+const spiceRoutes = require('./routes/api/spices')
+const cors = require('cors')
 require('dotenv').config();
 require('./config/database');
 
@@ -19,11 +22,14 @@ app.use(express.json())
 // to serve from the production 'build' folder
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(cors())
 
 // ---------
 // ROUTES
 // ---------
-app.use('/api/users', require('./routes/api/users'));
+app.use('/api/users', userRoutes);
+app.use('/api/spices', spiceRoutes);
+
 
 // if Express route not recognized, React will deal with the route
 app.get('/*', (req, res) => {

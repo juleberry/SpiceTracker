@@ -1,26 +1,19 @@
-const express = require('express');
-const router = express.Router();
-const spicesCtrl = require('../../controllers/api/spices');
+const express = require('express'); //import express
+const router  = express.Router(); 
+const spiceController = require('../../controllers/api/spices');
 
-// index -- find
-router.get('/', spicesCtrl.spiceIndex)
+// multer parses form data with express server
+// const multer = require('multer');
+// const upload = multer();
 
-// new -- none
-router.get('/new', spicesCtrl.newSpice);
+router.get('/', spiceController.getAllSpice);
+// upload.none() allows newSpice to read form data
+router.post('/new', spiceController.newSpice);
 
-// delete -- deleteOne
-router.delete('/:id', spicesCtrl.deleteSpice)
+router.delete('/', spiceController.deleteAllSpice);
 
-// update -- updateOne
-router.put('/', spicesCtrl.updateSpice);
-
-// create -- create(req.body)
-router.post('', spicesCtrl.createSpice);
-
-// edit spice -- findOne
-router.get('/:id', spicesCtrl.editSpice)
-
-// show spice -- findOne
-router.get('/:id', spicesCtrl.viewSpice);
+router.get('/:id/view', spiceController.getOneSpice);
+// router.post('/spice/:name', spiceController.newComment);
+router.delete('/:id', spiceController.deleteOneSpice);
 
 module.exports = router;

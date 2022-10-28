@@ -17,7 +17,6 @@ export default function SignUpForm (props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-
       const payload = {
         email: formData.email,
         password: formData.password,
@@ -73,9 +72,8 @@ export default function SignUpForm (props) {
             name="confirm"
             value={formData.confirm}
             onChange={handleChange}
-            required
-          /><br />
-          <button type="submit" disabled={disable}>Sign Up</button> <input type="reset" onClick={useState('')}/>
+            required /><br />
+          <button type="submit" disabled={disable} className="submitBtns">Sign Up</button> <button className="submitBtns" type="reset" onClick={useState('')}>Reset</button>
         </form>
         <p className="error-message">{errorState}</p>
       </div>

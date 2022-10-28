@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom"
-import { useParams } from "react-router-dom"
+const BASE_URL = '/api/spices'
 
-const Spice = props => {
-    const params = useParams()
+export default function Spice (props) {
     const spice = props.spiceList.filter( d => d.id === props.match.params.symbol)[0]
     
     return (
@@ -12,11 +11,8 @@ const Spice = props => {
         <p>Amount Remaining: {spice.amt}%</p>
         <p>Expiration Date: {spice.expDate}</p>
         <br />
-        <Link to={`/spices/${spice._id}/edit`}><button>Edit Spice</button></Link>
-        <Link to={"/spices"}><button>Return</button></Link>
+        <Link to={`${BASE_URL}/${spice._id}/edit`}><button>Edit Spice</button></Link>
+        <Link to={`${BASE_URL}/`}><button>Return</button></Link>
       </div>
     )
   }
-  
-  
-  export default Spice

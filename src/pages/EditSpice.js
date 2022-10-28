@@ -1,65 +1,41 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { updateSpice } from '../utilities/spices-service'
-import { getSpices } from '../utilities/spices.api'
+import axios from "axios";
+import React from "react";
 
-export default function EditSpice (props) {
+const BASE_URL = '/api/spices';
 
-  const [edit, setEdit] = useState(props?.spice);
+export default function EditSpice ({ spice }) {
+  const [post, setPost] = React.useState(null);
 
-  useEffect(() => {
-    getSpices()
-    if(edit) {
-      setEdit(props.spice)
-    }
-  }, [edit, props.spice])
+  React.useEffect(() => {
+    axios.get(`${BASE_URL}/${spice?._id}`).then((response) => {
+      setPost(response.data);
+    });
+  },);
 
-  const [errorState, setErrorState] = useState()
-
-  const [formData, setFormData] = useState({
-    name: '',
-    size: '',
-    amt: '',
-    expDate: ''
-  });
-
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+  function updatePost() {
+    axios
+      .put(`${BASE_URL}/${spice?._id}`, {
+        name: '',
+    	  size: '',
+    	  amt: '',
+    	  expDate: ''
+      })
+      .then((response) => {
+        setPost(response.data);
+      });
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-
-      const payload = {
-        name: formData.name,
-        size: formData.size,
-        expDate: formData.expDate,
-        amt: formData.amt
-      }
-
-      await updateSpice(payload);
-
-    } catch {
-      setErrorState('Update of Spice Details Failed - Try Again');
-    }
-  }
+  if (!post) return "No changes were made"
 
   return (
-    
     <>
-    <h1>Update Spice</h1>
-    {/* <p>Here will be the details to edit individual spices. User will choose from the list populated here.
-    User will be able to delete spices or edit spice details.
-    </p> */}
-    <form onSubmit={handleSubmit}>
+    <h1>Update Spice Details</h1>
+    <form onSubmit={updatePost}>
         <label htmlFor="name">Spice Name:</label>
-        <input type="text" name="name" defaultValue={formData.name}
-            onChange={handleChange} /><br/>
+        <input type="text" name="name" defaultValue={post.name} /><br/>
 
         <label htmlFor="size">Size:</label>
-        <select name="size" defaultValue={formData.size}
-            onChange={handleChange}>
+        <select name="size" defaultValue={post.size}>
         <option value="none">Select a Size</option>
         <option value="Small">Small (0.90 oz)</option>
         <option value="Medium">Medium (3.00 oz - 4.00 oz)</option>
@@ -68,12 +44,10 @@ export default function EditSpice (props) {
       </select><br/>
 
       <label htmlFor="expDate">Expiration Date:</label>
-      <input type="month" name="expDate" defaultValue={formData.expDate}
-            onChange={handleChange} /><br/>
+      <input type="month" name="expDate" defaultValue={post.expDate} /><br/>
 
         <label htmlFor="amt">Amount Remaining:</label>
-        <select name="amt" defaultValue={formData.amt}
-            onChange={handleChange}>
+        <select name="amt" defaultValue={post.amt} >
         <option value="none">%</option>
         <option value="10">10%</option>
         <option value="20">20%</option>
@@ -86,9 +60,8 @@ export default function EditSpice (props) {
         <option value="90">90%</option>
         <option value="100">100%</option>
       </select><br/>
-
-      <button type="submit">Add Spice</button>
+<button type="submit" className="newSpiceForm submitBtns">Submit</button>
       </form>
-    </>
-  )
+      </>
+  );
 }

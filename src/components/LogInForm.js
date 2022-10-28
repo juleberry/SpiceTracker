@@ -23,7 +23,7 @@ export default function LogInForm (props) {
       props.setUser(user);
 
     } catch {
-      setErrorState('Sign Up Failed - Try Again');
+      setErrorState('Log In Failed - Try Again');
     }
   }
 

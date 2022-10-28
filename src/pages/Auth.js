@@ -4,7 +4,8 @@ import LogInForm from "../components/LogInForm"
 export default function Auth (props) {
   return (
     <main id="authChoices">
-      <h1>Welcome to Spice Tracker, Your Virtual Spice Cabinet!</h1>
+      <h1>Welcome to Spice Tracker,<br />Your Virtual Spice Cabinet!</h1>
+      <div id="choiceContainer">
       <div id="signUpChoice">
       <h2>Sign Up</h2>
       <SignUpForm setUser={props.setUser} />
@@ -13,6 +14,7 @@ export default function Auth (props) {
       <div id="logInChoice">
       <h2>Log In</h2>
       <LogInForm setUser={props.setUser} />
+      </div>
       </div>
     </main>
   )
