@@ -1,13 +1,13 @@
 import axios from "axios";
 import React from "react";
 
-const BASE_URL = '/api/spice';
+const BASE_URL = '/api/spices';
 
 export default function NewSpice (props) {
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(`${BASE_URL}/new`).then((response) => {
+    axios.get(`${BASE_URL}`).then((response) => {
       setData(response.data);
     });
   }, []);
@@ -18,7 +18,7 @@ export default function NewSpice (props) {
 
   const handleSubmit = async (event) => {
 	event.preventDefault();
-    axios.post(`${BASE_URL}/new`, {
+    axios.post(`${BASE_URL}`, {
         name: data.name,
         size: data.size,
         expDate: data.expDate,
@@ -50,7 +50,10 @@ export default function NewSpice (props) {
       </select><br/>
 
       <label htmlFor="expDate">Expiration Date: </label>
-      <input type="month" name="expDate" value={data.expDate}
+      {/* <input type="month" name="expDate" value={data.expDate}
+            onChange={handleChange} className="newSpiceForm" /><br/> */}
+
+        <input type="date" name="expDate" value={data.expDate}
             onChange={handleChange} className="newSpiceForm" /><br/>
 
         <label htmlFor="amt">Amount Remaining: </label>

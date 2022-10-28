@@ -1,41 +1,40 @@
 import axios from "axios";
 import React from "react";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 
-const BASE_URL = '/api/spices';
+export default function EditSpice (props) {
 
-export default function EditSpice ({ spice }) {
-  const [post, setPost] = React.useState(null);
-
-  React.useEffect(() => {
-    axios.get(`${BASE_URL}/${spice?._id}`).then((response) => {
-      setPost(response.data);
+  useEffect(() => {
+    axios.get(`/spices/${props?.spice?._id}`).then((response) => {
+      props.setSpiceList(response.data);
     });
   },);
 
-  function updatePost() {
+  function updateSpice() {
     axios
-      .put(`${BASE_URL}/${spice?._id}`, {
+      .put(`/${props?.spice?._id}`, {
         name: '',
     	  size: '',
     	  amt: '',
     	  expDate: ''
       })
       .then((response) => {
-        setPost(response.data);
+        props.setSpiceList(response.data);
       });
   }
 
-  if (!post) return "No changes were made"
+  if (!props.spiceList) return "No changes were made"
 
   return (
     <>
     <h1>Update Spice Details</h1>
-    <form onSubmit={updatePost}>
+    <form onSubmit={updateSpice}>
         <label htmlFor="name">Spice Name:</label>
-        <input type="text" name="name" defaultValue={post.name} /><br/>
+        <input type="text" name="name" defaultValue={props?.spice?.name} /><br/>
 
         <label htmlFor="size">Size:</label>
-        <select name="size" defaultValue={post.size}>
+        <select name="size" defaultValue={props?.spice?.size}>
         <option value="none">Select a Size</option>
         <option value="Small">Small (0.90 oz)</option>
         <option value="Medium">Medium (3.00 oz - 4.00 oz)</option>
@@ -44,10 +43,10 @@ export default function EditSpice ({ spice }) {
       </select><br/>
 
       <label htmlFor="expDate">Expiration Date:</label>
-      <input type="month" name="expDate" defaultValue={post.expDate} /><br/>
+      <input type="date" name="expDate" defaultValue={props?.spice?.expDate} /><br/>
 
         <label htmlFor="amt">Amount Remaining:</label>
-        <select name="amt" defaultValue={post.amt} >
+        <select name="amt" defaultValue={props?.spice?.amt} >
         <option value="none">%</option>
         <option value="10">10%</option>
         <option value="20">20%</option>
@@ -60,7 +59,7 @@ export default function EditSpice ({ spice }) {
         <option value="90">90%</option>
         <option value="100">100%</option>
       </select><br/>
-<button type="submit" className="newSpiceForm submitBtns">Submit</button>
+<button type="submit" className="newSpiceForm submitBtns">Submit</button><button type="submit" className="newSpiceForm submitBtns">Delete</button><Link to={"/spices"}><button>Return</button></Link>
       </form>
       </>
   );

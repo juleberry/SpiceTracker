@@ -3,7 +3,7 @@ import './style.css'
 import { Routes, Route } from 'react-router-dom'
 import { useState } from 'react';
 import { getUser } from './utilities/users-service'
-// import Auth from './pages/Auth'
+import Auth from './pages/Auth'
 import Spice from './pages/Spice';
 import NewSpice from './components/NewSpice'
 import SpiceCabinet from './pages/SpiceCabinet';
@@ -18,19 +18,21 @@ function App() {
 
   const [user, setUser] = useState(getUser())
 
+  const [spiceList, setSpiceList] = useState(['']);
+
   return (
     <>
     <main className="App">
-      {/* { */}
-        {/* user ? */}
+      {
+        user ?
         <>
         <NavBar setUser={setUser} user={user} />
       <Routes>
         {/* spice routes */}
-        <Route path="/spices" element={<SpiceCabinet />} />
+        <Route path="/spices" element={<SpiceCabinet setSpiceList={setSpiceList} spiceList={spiceList}/>} />
         <Route path="/spices/new" element={<NewSpice />} />
-        <Route path="/spices/:id/edit" element={<EditSpice />} />
-        <Route path="/spices/:id/view" element={<Spice />} />
+        <Route path="/spices/:id/edit" element={<EditSpice setSpiceList={setSpiceList} spiceList={spiceList} />} />
+        <Route path="/spices/:id" element={<Spice spiceList={spiceList} />} />
         <Route path="/spices" element={<SpiceList />} />
 
         {/* main routes */}
@@ -38,9 +40,9 @@ function App() {
       <Route path="/" element={<Dashboard />} />
       </Routes>
       </>
-      {/* : */}
-      {/* <Auth setUser={setUser} /> */}
-  {/* } */}
+      :
+      <Auth setUser={setUser} />
+  }
   </main>
   <Footer />
     </>

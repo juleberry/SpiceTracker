@@ -2,11 +2,16 @@ import axios from 'axios';
 const BASE_URL = '/api/users';
 
 export async function signUp(userData) {
+  try {
   const response = await axios.post(`${BASE_URL}`, userData)
   if (response.status === 201) {
     return response.data
   } else {
+
     throw new Error('Invalid Sign Up!')
+  }
+  } catch(error) {
+    console.log(error.response.data)
   }
 }
 

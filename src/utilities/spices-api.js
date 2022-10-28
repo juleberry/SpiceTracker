@@ -11,7 +11,7 @@ export async function getAllSpice() {
 }
 
 export async function newSpice(spiceData) {
-  const response = await axios.post(`${BASE_URL}/new`, spiceData)
+  const response = await axios.post(`${BASE_URL}`, spiceData)
   if (response.status === 201) {
     return response.data
   } else {

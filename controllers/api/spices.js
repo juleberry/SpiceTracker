@@ -57,7 +57,7 @@ const deleteOneSpice = (req, res, next) => {
   res.json({message: "DELETE 1 spice"});
 };
 
-// EDIT '/spices/edit/:id'
+// EDIT '/spices/:id/edit'
 const editSpice = (req, res) => {
   Spice.findOne({
     _id: req.params.id
@@ -68,7 +68,7 @@ const editSpice = (req, res) => {
         error: error
       })
     } else {
-      res.render('spices/edit', { spice: foundSpice });
+      res.render('spices/:id/edit', { spice: foundSpice });
     }
   })
 }
@@ -79,6 +79,7 @@ module.exports = {
   newSpice,
   deleteAllSpice,
   getOneSpice,
+  editSpice,
   // newComment,
   deleteOneSpice
 };
