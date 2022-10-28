@@ -22,3 +22,5 @@ Confirmation of successful addition of spice to "cabinet"
 ### Future Enhancements:
 Ability to sort spices alphabetically, by expiration date, and by amount remaining
 Ability to search for specific spices (also synced with keywords or matches with similar spice blends)
+Separate CSS files for each page/component/feature/etc.
+More efficient code commenting.
