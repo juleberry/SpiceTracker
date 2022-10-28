@@ -20,14 +20,13 @@ const BASE_URL = '/spices'
     return (
     <>
       <div id="spiceList">
-      <h2>Spices</h2>
+      <p>Choose a spice below for more details</p>
       {/* <SearchBar /> */}
-      <ul>
+      <ul id="listSpices">
           {props?.spiceList?.map((spice, index) => {
             return (
-              <li key={index}>
-              <h4><Link to={`${BASE_URL}/${spice?._id}`}>{spice?.name}</Link></h4>
-              </li>
+              <Link to={`${BASE_URL}/${spice?._id}`} key={index}><li id="spiceListItems" ><h4>{spice?.name}</h4>
+              </li></Link>
             )
           })
           }

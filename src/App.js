@@ -36,8 +36,8 @@ function App() {
         <Route path="/spices" element={<SpiceList />} />
 
         {/* main routes */}
-        <Route path="/users/settings" element={<Settings setUser={setUser} user={user} />} />
-      <Route path="/" element={<Dashboard />} />
+        <Route path="/users/:id/settings" element={<Settings setUser={setUser} user={user} />} />
+      <Route path="/" element={<Dashboard setUser={setUser} user={user} />} />
       </Routes>
       </>
       :

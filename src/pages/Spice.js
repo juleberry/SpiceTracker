@@ -9,15 +9,17 @@ export default function Spice (props) {
     const [spice, setSpice] = useState(props.spiceList.filter( d => d._id === params.id)[0])
     
     return (
-      <div>
-        <h1>Spice Details</h1>
-        <h2>{spice?.name}</h2>
+      <div className="sectionContainer">
+      <div className="sectionDetails">
+        <h2>Spice Details</h2><hr />
+        <h3>{spice?.name}</h3>
         <p>Size: {spice?.size}</p>
         <p>Amount Remaining: {spice?.amt}%</p>
         <p>Expiration Date: {spice?.expDate}</p>
         <br />
         <Link to={`/spices/${spice?._id}/edit`}><button>Edit Spice</button></Link>
         <Link to={"/spices"}><button>Return</button></Link>
+      </div>
       </div>
     )
   }
