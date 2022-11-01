@@ -6,4 +6,6 @@ router.post('/', usersController.create);
 
 router.post('/login', usersController.login);
 
+router.put(':id/settings/updateName', usersController.updateName);
+
 module.exports = router;

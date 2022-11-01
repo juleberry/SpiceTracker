@@ -1,10 +1,11 @@
 import axios from "axios";
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import * as spicesAPI from '../utilities/spices-api';
 
 export default function EditSpice (props) {
-
+  
   useEffect(() => {
     axios.get(`/spices/${props?.spice?._id}`).then((response) => {
       props.setSpiceList(response.data);
@@ -26,11 +27,21 @@ export default function EditSpice (props) {
 
   if (!props.spiceList) return "No changes were made"
 
+  function deleteOneSpice() {
+    axios
+      .delete(`/${props?.spice?._id}`)
+      .then((response) => {
+        props.setSpiceList(response.data);
+      });
+  }
+
   return (
     <>
-    <h1>Update Spice Details</h1>
-    <form onSubmit={updateSpice}>
-        <label htmlFor="name">Spice Name:</label>
+    <div className="sectionContainer">
+      <div className="sectionDetails">
+    <h3>Edit Spice Details</h3><hr />
+    <form onSubmit={updateSpice} method="DELETE">
+        <label htmlFor="name">Spice Name: </label>
         <input type="text" name="name" defaultValue={props?.spice?.name} /><br/>
 
         <label htmlFor="size">Size:</label>
@@ -43,7 +54,7 @@ export default function EditSpice (props) {
       </select><br/>
 
       <label htmlFor="expDate">Expiration Date:</label>
-      <input type="date" name="expDate" defaultValue={props?.spice?.expDate} /><br/>
+      <input type="date" name="expDate" placeholder="yyyy-mm" defaultValue={props?.spice?.expDate} /><br/>
 
         <label htmlFor="amt">Amount Remaining:</label>
         <select name="amt" defaultValue={props?.spice?.amt} >
@@ -59,8 +70,14 @@ export default function EditSpice (props) {
         <option value="90">90%</option>
         <option value="100">100%</option>
       </select><br/>
-<button type="submit" className="newSpiceForm submitBtns">Submit</button><button type="submit" className="newSpiceForm submitBtns">Delete</button><Link to={"/spices"}><button>Return</button></Link>
+<button type="submit" className="newSpiceForm submitBtns">Submit</button>
+
+<Link to={`/spices/${props?.spice?._id}/delete`}></Link><button type="submit" className="newSpiceForm deleteBtns" onClick={deleteOneSpice}>Delete</button>
+
+<Link to={"/spices"}><button>Return</button></Link>
       </form>
+      </div>
+    </div>
       </>
   );
 }

@@ -54,7 +54,12 @@ const getOneSpice = (req, res, next) => {
 
 //DELETE '/spices/:id'
 const deleteOneSpice = (req, res, next) => {
-  res.json({message: "DELETE 1 spice"});
+  Spice.deleteOne({
+    _id: req.params.id
+  }, (error, data) => {
+    console.log(data);
+    res.redirect('');
+  })
 };
 
 // EDIT '/spices/:id/edit'

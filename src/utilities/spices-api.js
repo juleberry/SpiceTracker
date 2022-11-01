@@ -19,3 +19,12 @@ export async function newSpice(spiceData) {
   }
 }
 
+export async function deleteOneSpice(spiceData) {
+  const response = await axios.delete(`${BASE_URL}/:id}`, spiceData)
+  if (response.status === 201) {
+    return response.data
+  } else {
+    throw new Error('Error deleting one spice')
+  }
+}
+

@@ -73,7 +73,7 @@ export default function SignUpForm (props) {
             value={formData.confirm}
             onChange={handleChange}
             required /><br />
-          <button type="submit" disabled={disable} className="submitBtns">Sign Up</button> <button className="submitBtns" type="reset" onClick={useState('')}>Reset</button>
+          <button type="submit" disabled={disable} className="submitBtns">Sign Up</button>
         </form>
         <p className="error-message">{errorState}</p>
       </div>

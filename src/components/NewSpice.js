@@ -19,7 +19,7 @@ export default function NewSpice (props) {
 
   const handleSubmit = async (event) => {
 	event.preventDefault();
-    axios.post(`${BASE_URL}`, {
+    await axios.post(`${BASE_URL}`, {
         name: data.name,
         size: data.size,
         expDate: data.expDate,
@@ -34,7 +34,9 @@ export default function NewSpice (props) {
 
   return (
     <>
-    <h1>Add New Spice</h1>
+    <div className="sectionContainer">
+      <div className="sectionDetails">
+    <h3>Add New Spice</h3><hr />
     <form autoComplete="off" onSubmit={handleSubmit} className="newSpiceForm">
         <label htmlFor="name">Spice Name: </label>
         <input type="text" name="name" value={data.name}
@@ -54,7 +56,7 @@ export default function NewSpice (props) {
       {/* <input type="month" name="expDate" value={data.expDate}
             onChange={handleChange} className="newSpiceForm" /><br/> */}
 
-        <input type="date" name="expDate" value={data.expDate}
+        <input type="date" name="expDate" placeholder="yyyy-mm" value={data.expDate}
             onChange={handleChange} className="newSpiceForm" /><br/>
 
         <label htmlFor="amt">Amount Remaining: </label>
@@ -73,8 +75,10 @@ export default function NewSpice (props) {
         <option value="100">100%</option>
       </select><br/>
 
-      <input type="submit" className="newSpiceForm submitBtns" value="Add New Spice" /><Link to={"/spices"}><button className="submitBtns newSpiceForm">Return</button></Link>
+      <button type="submit" className="newSpiceForm submitBtns">Submit</button><Link to={"/spices"}><button className="submitBtns newSpiceForm">Return</button></Link>
       </form>
+      </div>
+      </div>
     </>
   );
 }

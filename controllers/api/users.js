@@ -46,7 +46,27 @@ const login = (req, res) => {
   })
 }
 
+const updateName = async (req, res) => {
+  const newName = req.body.newName
+  const id = req.body.id
+  try {
+    await User.findById(id, (err, updatedName) => {
+      updatedName.name = newName;
+      updatedName.save()
+      res.send("Updated Name")
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+let updateEmail
+
+let updatePassword
+
 module.exports = {
   create,
-  login
+  login,
+  updateName,
+  updateEmail, updatePassword
 }

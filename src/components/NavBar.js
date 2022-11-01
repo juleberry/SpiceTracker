@@ -11,7 +11,7 @@ export default function NavBar (props) {
       <Link to={"/spices/new"}><button>Add Spice</button></Link>
       {/* <Link to={"/spices/edit"}><button>Update Spices</button></Link> */}
       <Link to={`/users/${props?.user?._id}/settings`} ><button>Settings</button></Link>
-      <button onClick={() => {
+      <button className='deleteBtns' onClick={() => {
         localStorage.removeItem('token');
         props.setUser(null);
       }}>Log Out</button>

@@ -18,7 +18,11 @@ function App() {
 
   const [user, setUser] = useState(getUser())
 
+  const [spice, setSpice] = useState([''])
+
   const [spiceList, setSpiceList] = useState(['']);
+
+  const [editSpice, setEditSpice] = useState([''])
 
   return (
     <>
@@ -36,6 +40,7 @@ function App() {
         <Route path="/spices" element={<SpiceList />} />
 
         {/* main routes */}
+        {/* <Route path="/users/:id/settings/updateName" element={<Settings />}/> */}
         <Route path="/users/:id/settings" element={<Settings setUser={setUser} user={user} />} />
       <Route path="/" element={<Dashboard setUser={setUser} user={user} />} />
       </Routes>

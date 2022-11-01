@@ -8,7 +8,7 @@ const BASE_URL = '/spices'
   export default function SpiceList (props) {
 
 
-    useEffect(function () {
+    useEffect(() => {
       function getAll() {
         spicesAPI.getAllSpice()
         .then((result) => props.setSpiceList(result));
@@ -23,7 +23,7 @@ const BASE_URL = '/spices'
       <p>Choose a spice below for more details</p>
       {/* <SearchBar /> */}
       <ul id="listSpices">
-          {props?.spiceList?.map((spice, index) => {
+          {props?.spiceList.map((spice, index) => {
             return (
               <Link to={`${BASE_URL}/${spice?._id}`} key={index}><li id="spiceListItems" ><h4>{spice?.name}</h4>
               </li></Link>
