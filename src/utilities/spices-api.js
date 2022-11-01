@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = 'https://spice-tracker-jb.herokuapp.com/';
+const BASE_URL = 'https://spice-tracker-jb.herokuapp.com/api/spices';
 
 export async function getAllSpice() {
   const response = await axios.get(`${BASE_URL}`)
