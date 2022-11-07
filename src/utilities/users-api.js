@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = 'https://spice-tracker-jb.herokuapp.com/users';
+const BASE_URL = 'https://spice-tracker-jb.herokuapp.com/';
 
 export async function signUp(userData) {
   try {
