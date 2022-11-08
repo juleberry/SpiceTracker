@@ -27,8 +27,8 @@ function App() {
   return (
     <>
     <main className="App">
-      {
-        user ?
+      {/* { */}
+        // user ?
         <>
         <NavBar setUser={setUser} user={user} />
       <Routes>
@@ -46,8 +46,8 @@ function App() {
       </Routes>
       </>
       :
-      <Auth setUser={setUser} />
-  }
+      {/* <Auth setUser={setUser} /> */}
+  {/* } */}
   </main>
   <Footer />
     </>
