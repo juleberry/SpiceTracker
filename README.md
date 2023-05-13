@@ -13,9 +13,7 @@ This spice tracker app allows you to create an inventory of your spices, herbs, 
 HTML, CSS, JavaScript, Mongoose, Express, React, NodeJS, Axios, BCrypt, JWT
 
 ### Getting Started:
-Deployment Links (coming soon but here are the links for now):
-  Netlify https://spice-tracker-jb.netlify.app/
-  Heroku https://spice-tracker-jb.herokuapp.com/
+Deployment Links: ** COMING SOON **
 Trello Board: https://trello.com/b/XtQA19hg/spice-cabinet
 
 ### Unsolved Problems:
